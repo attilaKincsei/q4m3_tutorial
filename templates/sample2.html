@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<script src="/home/akincsei/4 - jupyter_projects/q4m3_tutorial/static/c.js"></script>
+<script>
+    var serverurl = "//localhost:4242/",
+        c = connect(),
+        ws;
+    function connect() {
+        if ("WebSocket" in window) {
+            ws = new WebSocket("ws:" + serverurl);
+            ws.binaryType="arraybuffer";
+            ws.onopen=function(e){
+                console.log("on open");
+                console.log(e);
+            };
+            ws.onclose=function(e){
+                console.log("on close");
+                console.log(e);
+            };
+            ws.onmessage=function(e){
+                console.log("on message");
+                console.log(e);
+                sayN(deserialize(e.data));
+            };
+            ws.onerror=function(e) {
+                console.log("on error");
+                console.log(e);
+                toQ(e);
+                window.alert("WS Error");
+            };
+        } else alert("WebSockets not supported on your browser.");
+    }
+    function toQ(x) { ws.send(serialize({ payload: x })); }
+    function sayN(n) {
+        document.getElementById('answer').textContent = n;
+    }
+</script>
+</head>
+<body>
+    <h1 style='font-size:200px' id='answer'></h1>
+</body>
+</html>

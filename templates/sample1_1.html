@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<script src="/home/akincsei/4 - jupyter_projects/q4m3_tutorial/static/c.js"></script>
+<script>
+	var serverurl = "//localhost:4242/",
+		c = connect(),
+		ws;
+	function connect() {
+		if ("WebSocket" in window) {
+		 	ws = new WebSocket("ws:" + serverurl);
+			ws.binaryType="arraybuffer";
+			ws.onopen=function(e){
+				ws.send(serialize({ payload: "Amazon historical stock price data" }));
+			};
+			ws.onclose=function(e){
+			};
+			ws.onmessage=function(e){
+				sayN(deserialize(e.data));
+			};
+			ws.onerror=function(e) {window.alert("WS Error") };
+		} else alert("WebSockets not supported on your browser.");
+	}
+	function sayN(n) {
+		document.getElementById('answer').textContent = n;
+	}
+</script>
+</head>
+<body>
+  <p>Amazon historical stock price data</p>
+  <p id="answer" style="font-size: 10"></p>
+</body>
+</html>
