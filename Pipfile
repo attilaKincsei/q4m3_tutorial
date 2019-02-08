@@ -1,0 +1,21 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+jupyter-contrib-nbextensions = "*"
+ipywidgets = "*"
+jupyterlab = "*"
+matplotlib = "*"
+numpy = "*"
+beautifulsoup4 = "*"
+pandas = "*"
+tensorflow = "*"
+scipy = "*"
+jupyterlab-discovery = "*"
+
+[requires]
+python_version = "3.6"
