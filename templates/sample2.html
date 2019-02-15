@@ -3,11 +3,12 @@
 <head>
 <script src="/home/akincsei/4 - jupyter_projects/q4m3_tutorial/static/c.js"></script>
 <script>
-    var serverurl = "//localhost:4242/",
+    var serverurl = "//localhost:8080/",
         c = connect(),
         ws;
     function connect() {
         if ("WebSocket" in window) {
+        	console.log("websocket in window")
             ws = new WebSocket("ws:" + serverurl);
             ws.binaryType="arraybuffer";
             ws.onopen=function(e){
